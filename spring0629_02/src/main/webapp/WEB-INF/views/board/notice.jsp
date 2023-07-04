@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,15 +169,19 @@
 								<th scope="col" class="tnone">조회수</th>
 							</thead>
 							<tbody>
+								<c:forEach var="board" items="${list }">
 								<tr>
-									<td class="tnone">1</td>
+									<td class="tnone">${board.bno }</td>
 									<td class="left">
-										<a href="/board/noticeView?bno=1">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
+										<a href="/board/noticeView?bno=1">
+										${board.btitle }
+										</a>
 										<img src="../images/ico/ico_new.gif" alt="NEW" />
 									</td>
 									<td>14-01-28</td>
 									<td class="tnone right">9999</td>
 								</tr>
+								</c:forEach>
 
 								<tr>
 									<td class="tnone">2</td>

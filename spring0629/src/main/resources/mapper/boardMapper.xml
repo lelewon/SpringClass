@@ -33,8 +33,14 @@
 		select * from commentboard where cno=#{cno}
 	</select>
 	
+	<!-- 하단 댓글 1개 삭제 -->
+	<delete id="commentDelete">
+		delete commentboard where cno=#{cno}
+	</delete>
 	
-	
-	
+	<!-- 하단 댓글 수정 저장 -->
+	<update id="commentUpdateSave">
+		update commentboard set cpw=#{cpw}, ccontent=#{ccontent}, cdate=sysdate where cno=#{cno}
+	</update>
 	
 </mapper>
