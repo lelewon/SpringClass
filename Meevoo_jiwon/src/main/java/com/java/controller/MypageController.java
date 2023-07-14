@@ -11,8 +11,8 @@ public class MypageController {
 		return "mypage/myprofil";
 	}
 
-	@RequestMapping("/mypage/myprofil2")
-	public String myprofil2() {
-		return "mypage/myprofil2";
+	@RequestMapping("/mypage/myclub")
+	public String myclub() {
+		return "mypage/myclub";
 	}
 }
