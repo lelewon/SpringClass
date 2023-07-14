@@ -17,9 +17,6 @@
 		<!-- 제이쿼리 최신 -->
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style>
-			/* #preview {/* position: relative; */ width: 300px; height: 300px; border-radius: 50%; /*둥그런 원으로 만들기 위함*/ overflow: hidden; float:left;} */
-			#pic1 img {/* position: absolute; top: 0; left: 0; */ width: 100%; height: 100%; object-fit: cover;}
-			
 			#all1{width:900px; border:1px solid black; margin:0 auto;}
 			.section1{color: black;}
 			.main1{width:200px; margin:0 auto;}
@@ -70,9 +67,6 @@
 												<input type="file" name="mb_picture" accept=".jpg, .png, .jpeg, .bmp, .tif, .gif, .svg" id="profile-photo" />
 												<label for="profile-photo">프로필 사진 수정</label>
 											</div>
-											<!-- <div class="pic1" style="border:1px solid black;">
-												<img src="/images/clubPick1.png" alt="user" width="100px;">
-											</div> -->
 											<div class="info1">
 													<div id="info1_1">
 														<div>이름&nbsp;&nbsp;&nbsp;&nbsp;: </div>
@@ -154,7 +148,7 @@
 									<div class="btnArea">
 										<div class="bCenter">
 											<ul>
-												<li><a style="cursor:pointer;" onclick="memberBtn()" class="button small fit">수정하기</a></li>
+												<li><button style="cursor:pointer;" onclick="memberBtn()" class="button small fit">수정</button></li>
 											</ul>
 										</div>
 									</div>

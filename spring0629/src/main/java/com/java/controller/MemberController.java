@@ -32,6 +32,8 @@ public class MemberController {
 		System.out.println("memberDto 2 : "+memberDto.getPw());
 		MemberDto mdto = memberService.selectLogin(memberDto);
 		if(mdto!=null) {
+			
+			
 			session.setAttribute("sessionId", mdto.getId());
 			session.setAttribute("sessionName", mdto.getName());
 		}else {
