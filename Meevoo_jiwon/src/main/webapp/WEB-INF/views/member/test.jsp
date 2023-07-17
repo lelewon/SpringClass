@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,247 +19,16 @@
 <link rel="stylesheet" href="../css/login.lee.css" /> 
 <link rel="stylesheet" href="../css/content.lee.css" />
 <style>
-	#emailList{margin: 5px 0 0;}
-	#pta_email{height:80px;}
 	.addressType{text-align: left;}
 	#postcode{text-align: left;}
 	#m{width:30px; margin:7px; font-size: 12px;}
 	#f{width:30px; margin:7px; font-size: 12px;}
 	#chk_e{width:100px; padding:8px 0 0 10px;}
-	#postcode1{height:50px;}
-	#pta_email{display: none;}
+	#postcode1{height: 50px;}
 </style>
 <!-- 제이쿼리 최신 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-<!-- <script type="text/javascript">
-//joinform_check 함수로 유효성 검사
-function joinform_check() {
-	//변수에 담아주기
-  var name = document.getElementById("name");
-  var id = document.getElementById("mem_id");
-  var pw = document.getElementById("mem_pw");
-  var pw2 = document.getElementById("mem_pw2");
-  var email1 = document.getElementById("mem_email1");
-  var email2 = document.getElementById("mem_email2");
-  var m = document.getElementById("m");
-  var f = document.getElementById("f");
-  var addr1 = document.getElementById("addr1");
-  var addr2 = document.getElementById("addr2");
-  var birth = document.getElementById("mem_birth");
-  var exercise = document.getElementById("mem_exercise");
-  
-  if (name.value == "") {
-    alert("이름을 입력하세요.");
-    name.focus();
-    return false;
-  };
-  
-  if (id.value == "") { //해당 입력값이 없을 경우 같은말: if(!id.value)
-    alert("아이디를 입력하세요.");
-    id.focus(); //focus(): 커서가 깜빡이는 현상, blur(): 커서가 사라지는 현상
-    return false; //return: 반환하다 return false:  아무것도 반환하지 말아라 아래 코드부터 아무것도 진행하지 말것
-  };
-
-  if (pw.value == "") {
-    alert("비밀번호를 입력하세요.");
-    pw.focus();
-    return false;
-  };
-
-  //비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
-  /* var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/; */
-
-  if (!pwCheck.test(pw.value)) {
-    alert("비밀번호는 숫자만 5자리 사용해야 합니다.");
-    pw.focus();
-    return false;
-  };
-
-  if (pw2.value !== pw.value) {
-    alert("비밀번호가 일치하지 않습니다..");
-    pw2.focus();
-    return false;
-  };
-
-  if (email1.value == "") {
-	    alert("비밀번호를 입력하세요.");
-	    email1.focus();
-	    return false;
-	  };
-
-  if (email2.value == "") {
-	    alert("비밀번호를 한번 더 입력하세요.");
-	    email2.focus();
-	    return false;
-	  };
-
-  if (!f.checked && !m.checked) { //둘다 미체크시
-    alert("성별을 선택해 주세요.");
-    f.focus();
-    return false;
-  }
-
-  if (addr1.value == "") {
-    alert("우편번호를 검색하세요.");
-    addr1.focus();
-    return false;
-  }
-  
-  if (addr2.value == "") {
-    alert("상세주소를 입력하세요.");
-    addr2.focus();
-    return false;
-  }
-  
-  var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
-
-  if (!reg.test(mobile.value)) {
-    alert("전화번호는 숫자만 입력할 수 있습니다.");
-    mobile.focus();
-    return false;
-  }
-
-
-  if (!agree.checked) { //체크박스 미체크시
-    alert("약관 동의를 체크하세요.");
-    agree.focus();
-    return false;
-  }
-
-//입력 값 전송
-  document.join_form.submit(); //유효성 검사의 포인트   
-}
-
-/* //아이디 중복체크 팝업창(현재 공백문서)
-function id_check() {
-  //window.open("팝업될 문서 경로", "팝업될 문서 이름", "옵션");
-  window.open("", "", "width=600, height=200, left=200, top=100");
-} */
-
-</script> -->
-
 <script type="text/javascript"> /* 글자수, 입력 조건 스크립트 */
-	function joinform_check(){
-		let nameCheck = /^[ㄱ-ㅎ가-힣]{2,}$/ //^[ㄱ-ㅎ가-힣].{1,}$/ ; // ^ 는 시작 [모든 국문자] + 는 하나이상 $ 는 끝
-		let numCheck = /^[0-9]+$/ ;  //숫자인지
-		let korCheck = /^[ㄱ-ㅎ가-힣]+$/ ; //한글인지
-		let alphaCheck = /^[a-zA-Z]+$/ ; //영문자인지
-		let etcCheck = /^[!@#$%^&*,.?_-]+$/ ; //특수문자인지
-		let idCheck = /^[a-z]{2,}$/ ; //영문자, 숫자, _ 만 가능 {} 는 자릿수
-		let idCheck1 = /^[a-zA-Z0-9_]{2,5}$/ ; //영문자, 숫자, _ 만 가능 {} 는 자릿수
-		let idCheck2 = /^[a-zA-Z]{1}[a-zA-Z0-9_]{2,5}$/ ; //1번째 무조건 영문자만 가능
-		let pwCheck = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{2,7}$/ ;  // ? 는 비교 . 은 한개씩 * 모든 것  즉 한개씩 모든 것을 가져와서 비교해라 한개라도 있으면 True 
-		let pwCheck2 = /^[0-9]{5}$/ ;
-		let phoneCheck = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/ ; 010-1111-1111
-		
-		if(!nameCheck.test($("#mem_name").val())){
-			alert("2글자 이상, 한글만 입력가능합니다.");
-			$("#mem_name").focus();
-			return false;
-		}else{
-			alert("성공");
-		}
-		
-		//이름 입력, 두글자 이상 입력 가능
-		/* let name_len = $("#mem_name").val().length
-		if($("#mem_name").val() != ""){
-		}else{
-			alert("이름을 입력하세요.");
-			$("#mem_name").focus();
-		    return false;
-		} */
-		
-		//아이디 입력, 소문자 2자리 이상 입력 가능
-		if ($("#mem_id").val()!="") {
-			if(!idCheck.test($("#mem_id").val())){
-				alert("영문 소문자 2자리 이상 입력이 가능합니다.");
-				$("#mem_id").focus();
-				return false;
-			}
-		  }else{
-		    alert("아이디를 입력하세요.");
-		    $("#mem_id").focus();
-		    return false;
-		  }
-		
-		//비밀번호 입력, 숫자 5자리만 입력 가능
-		if($("#mem_pw").val()!=""){
-			if(!pwCheck2.test($("#mem_pw").val())){
-				alert("5자리 숫자만 입력이 가능합니다.");
-				$("#mem_pw").focus();
-				return false;
-			}
-		}else{
-			alert("비밀번호를 입력하세요");
-			$("#mem_pw").focus();
-			return false;
-		}
-		
-		//비밀번호 확인 입력
-		if($("#mem_pw2").val()!=""){
-			if ($("#mem_pw2").val() != $("#mem_pw").val()) {
-			    alert("비밀번호가 일치하지 않습니다..");
-			    $("#mem_pw2").focus();
-			    return false;
-			}
-		}else{
-			alert("비밀번호를 한번 더 확인하세요")
-			$("#mem_pw2").focus();
-			return false;
-		}
-		
-		//이메일 아이디 입력
-		if ($("#mem_email1").val()=="") {
-		    alert("이메일을 입력하세요.");
-		    $("#mem_email1").focus();
-		    return false;
-		}
-
-		//이메일 주소 입력
-		if ($("#mem_email2").val()=="") {
-		    alert("이메일을 입력하세요.");
-		    $("#mem_email2").focus();
-		    return false;
-		}
-		
-		
-		//우편번호, 도로명 주소 입력
-		if ($("#addr1").val()=="") {
-		    alert("우편번호를 검색하세요.");
-		    $("#addr1").focus();
-		    return false;
-		}
-		
-		//상세주소 입력
-		if ($("#addr2").val()=="") {
-			alert("상세주소를 입력하세요.");
-			$("#addr2").focus();
-		    return false;
-		}
-		
-		//태어난해 입력
-		if ($("#mem_birth").val()=="") {
-			alert("태어난 해를 선택하세요.");
-			$("#mem_birth").focus();
-		    return false;
-		}
-		
-		//운동종목 입력
-		if ($("#exercise").val()=="") {
-			alert("운동종목을 선택하세요.");
-			$("#exercise").focus();
-		    return false;
-		}
-		
-		
-		
-		
-		alert("회원정보를 저장합니다.");
-	}
-</script>
-
-<!-- <script type="text/javascript"> /* 글자수, 입력 조건 스크립트 */
 	function joinform_check(){
 		let nameCheck = /^[ㄱ-ㅎ가-힣]+$/ ; // ^ 는 시작 [모든 국문자] + 는 하나이상 $ 는 끝
 		let numCheck = /^[0-9]+$/ ;  //숫자인지
@@ -289,7 +57,7 @@ function id_check() {
 			$("#mem_name").focus();
 			return false;
 		}
-	
+		
 		//아이디 입력, 소문자 2자리 이상 입력 가능
 		if(!idCheck.test($("#mem_id").val())){
 			alert("영문 소문자 2자리 이상 입력이 가능합니다.");
@@ -309,8 +77,7 @@ function id_check() {
 		}
 		alert("회원정보를 저장합니다.");
 	}
-</script> -->
-
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"> /* 우편번호찾기 스크립트 */
 function addrBtn() {
@@ -358,6 +125,111 @@ function addrBtn() {
     }).open();
 }
 </script>
+
+<script type="text/javascript">
+//joinform_check 함수로 유효성 검사
+function joinform_check() {
+  //변수에 담아주기
+  var name = document.getElementById("mem_name");
+  var id = document.getElementById("mem_id");
+  var pw = document.getElementById("mem_pw");
+  var pw2 = document.getElementById("mem_pw2");
+  var email1 = document.getElementById("mem_email1");
+  var email2 = document.getElementById("mem_email2");
+  var m = document.getElementById("m");
+  var f = document.getElementById("f");
+  var addr1 = document.getElementById("addr1");
+  var addr2 = document.getElementById("addr2");
+  var birth = document.getElementById("mem_birth");
+  var execise = document.getElementById("mem_execise");
+  
+  if (uid.value == "") { //해당 입력값이 없을 경우 같은말: if(!uid.value)
+    alert("아이디를 입력하세요.");
+    uid.focus(); //focus(): 커서가 깜빡이는 현상, blur(): 커서가 사라지는 현상
+    return false; //return: 반환하다 return false:  아무것도 반환하지 말아라 아래 코드부터 아무것도 진행하지 말것
+  };
+
+  if (pwd.value == "") {
+    alert("비밀번호를 입력하세요.");
+    pwd.focus();
+    return false;
+  };
+
+  //비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
+  var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+
+  if (!pwdCheck.test(pwd.value)) {
+    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+    pwd.focus();
+    return false;
+  };
+
+  if (repwd.value !== pwd.value) {
+    alert("비밀번호가 일치하지 않습니다..");
+    repwd.focus();
+    return false;
+  };
+
+  if (uname.value == "") {
+    alert("이름을 입력하세요.");
+    uname.focus();
+    return false;
+  };
+
+  if (!female.checked && !male.checked) { //둘다 미체크시
+    alert("성별을 선택해 주세요.");
+    female.focus();
+    return false;
+  }
+
+  var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
+
+  if (!reg.test(mobile.value)) {
+    alert("전화번호는 숫자만 입력할 수 있습니다.");
+    mobile.focus();
+    return false;
+  }
+
+  if (email_id.value == "") {
+    alert("이메일 주소를 입력하세요.");
+    email_id.focus();
+    return false;
+  }
+
+  if (!agree.checked) { //체크박스 미체크시
+    alert("약관 동의를 체크하세요.");
+    agree.focus();
+    return false;
+  }
+
+  //입력 값 전송
+  document.join_form.submit(); //유효성 검사의 포인트   
+}
+
+//아이디 중복체크 팝업창(현재 공백문서)
+function id_check() {
+  //window.open("팝업될 문서 경로", "팝업될 문서 이름", "옵션");
+  window.open("", "", "width=600, height=200, left=200, top=100");
+}
+
+//이메일 옵션 선택후 주소 자동 완성
+function change_email() {
+  var email_add = document.getElementById("email_add");
+  var email_sel = document.getElementById("email_sel");
+
+  //지금 골라진 옵션의 순서와 값 구하기
+  var idx = email_sel.options.selectedIndex;
+  var val = email_sel.options[idx].value;
+
+  email_add.value = val;
+}
+
+//우편번호 검색 팝업창(현재 공백문서)
+function search_address() {
+  window.open("", "b", "width=600, height=300, left=200, top=100");
+}
+</script>
+
 
 
 </head>
@@ -412,26 +284,12 @@ function addrBtn() {
 														<th scope="row" style="height:56.59px;"><span>아이디 *</span></th>
 														<td style="height:56.59px;">
 															<ul class="pta" style="margin:0;">
-																<li class="r10"><input type="text" onkeyup="idKey()" id="mem_id" class="w134" /></li>
-																<li id="idKeyText" style="width:100px; padding:8px 0 0 0;"><a href="#" class="button primary small fit">중복확인</a></li>
-																<li class="pt5"><span class="mvalign">※ 영문 소-문자 2자리 이상 입력 가능</span></li>
+																<li class="r10"><input type="text" id="mem_id" class="w134" /></li>
+																<li style="width:100px; padding:8px 0 0 0;"><a href="#" class="button primary small fit">중복확인</a></li>
+																<li class="pt5"><span class="mvalign">※ 영문 소문자 2자리 이상 입력 가능</span></li>
 															</ul>
 														</td>
 													</tr>
-													<script>
-														function idKey(){
-															let id1 = $("#mem_id").val();
-															if(id1 == getName()){
-																$("#idKeyText").html("<span class='mvalign black'>* 비밀번호가 일치합니다.</span>")
-															}else{
-																$("#pwKeyText").html("<span class='mvalign orange'>* 비밀번호가 일치하지 않습니다.</span>")
-															}
-															
-															console.log($("#mem_pw2").val());
-															return false;
-														}
-													</script>
-													
 													<tr>
 														<th scope="row"><span>비밀번호 *</span></th>
 														<td>
@@ -445,7 +303,7 @@ function addrBtn() {
 														function pwKey(){
 															let pw1 = $("#mem_pw").val();
 															if(pw1 == $("#mem_pw2").val()){
-																$("#pwKeyText").html("<span class='mvalign black'>* 비밀번호가 일치합니다.</span>")
+																$("#pwKeyText").html("<span class='mvalign black'>* 비밀번호가 일치입니다.</span>")
 															}else{
 																$("#pwKeyText").html("<span class='mvalign orange'>* 비밀번호가 일치하지 않습니다.</span>")
 															}
@@ -459,7 +317,7 @@ function addrBtn() {
 														<th scope="row"><span>비밀번호 확인 *</span></th>
 														<td>
 															<ul class="pta">
-																<li class="r10"><input type="text" onkeyup="pwKey()" id="mem_pw2" class="w134" /></li>
+																<li class="r10"><input type="text" onKeyUp="pwKey()" id="mem_pw2" class="w134" /></li>
 																<li id="pwKeyText">
 																</li>
 															</ul>
@@ -469,9 +327,9 @@ function addrBtn() {
 														<th scope="row"><span>이메일</span></th>
 														<td>
 															<ul class="pta">
-																<li><input type="text" name="email" id="mem_email1" class="w134" style="width:163px;"/></li>
+																<li><input type="text" name="email1" id="mem_email1" class="w134" style="width:163px;"/></li>
 																<li id=valign1><span class="valign">&nbsp;@&nbsp;</span></li>
-																<li class="r10"><input type="text" name="email" id="mem_email2" class="w134" style="width:163px;"/></li>
+																<li class="r10"><input type="text" name="email2" id="mem_email2" class="w134" style="width:163px;"/></li>
 																<script>
 																	function email_chn(){
 																		console.log($("#emailList").val());
@@ -505,60 +363,8 @@ function addrBtn() {
 																		<option value="empas.com">empas.com</option>
 																	</select>&nbsp;&nbsp;&nbsp;
 																</li>
-																<!-- <input type="hidden" name="email" id="email"> -->
-																<li id="chk_e"><a onclick="emailBtn()" style="cursor: pointer;" class="button primary small fit">인증코드 발송</a></li>
-															</ul>
-															
-															<script>
-																let temp_code=""; //전역변수로 사용
-																
-																function emailBtn(){
-																	if($("#mem_name").val()=="" || $("#mem_email1").val()=="" || $("#mem_email2").val()==""){
-																		alert("이름과 이메일을 입력한 후 인증코드 발송 버튼을 클릭하세요");
-																	}else{
-																		$("#pta_email").css("display","block");
-																	}
-																	
-																	$.ajax({
-																		url:"/member/emailSend",
-																		type:"post",
-																		data:{"name":$("#mem_name").val(),"email":$("#mem_email1").val()+"@"+$("#mem_email2").val()},
-																		success:function(data){
-																			alert("이메일이 발송되었습니다.");
-																			temp_code = data;
-																			console.log("pwCode : "+temp_code);
-																			$("#mem_name").attr("readonly",true);
-																		},
-																		error:function(){
-																			alert("실패");
-																		}
-																	});
-																}
-																
-																
-																
-																function authBtn(){
-																	if($("#temp_code").val().length==0){
-																		alert("인증코드를 입력하셔야 합니다.");
-																		$("#temp_code").focus();
-																		return false;
-																	}
-																	console.log("authBtn : "+temp_code)
-																	console.log("authBtn2 : "+$("#temp_code").val())
-																	
-																	if(temp_code==$("#temp_code").val()){
-																		
-																		alert("이메일 인증이 완료되었습니다.");
-																	}else{
-																		alert("이메일 인증코드가 틀립니다. 다시 인증요청을 해주세요");
-																		$("#temp_code").val("");
-																	}
-																}
-															</script>
-															<ul id="pta_email" class="pta">
-																<li class="r10"><input type="text" id="temp_code" class="w134" /></li>
-																<li style="width:100px; padding:8px 0 0 0;"><a style="cursor: pointer;" onclick="authBtn()" class="button primary small fit">인증코드 확인</a></li>
-																<li class="pt5"><span class="mvalign">※ 이메일을 확인해서 인증코드를 입력해주세요</span></li>
+																<input type="hidden" name="email" id="email">
+																<li id="chk_e"><a href="#" class="button primary small fit">중복확인</a></li>
 															</ul>
 														</td>
 													</tr>
@@ -595,7 +401,7 @@ function addrBtn() {
 													</tr>
 													
 													<tr>
-														<th scope="row"><span>태어난해 *</span></th>
+														<th scope="row"><span>생년월일 *</span></th>
 														<td>
 															<ul class="pta">
 																<li>
@@ -617,12 +423,10 @@ function addrBtn() {
 														<td>
 															<ul class="pta">
 																<li>
-																	<select id="exercise" name="exercise">
-																		<option value='' selected="selected" id="mem_exercise">선택하세요</option>
-																		<c:forEach var="scate" items="${scate }">
-																			<option value='scate' >${scate }</option>
-																		
-																		</c:forEach>
+																	<select id="mem_execise">
+																		<option value='' selected="selected">선택하세요</option>
+																		<!-- <option value='' >운동종목</option> -->
+																		</script>
 																	</select>
 																</li>
 															</ul>
@@ -679,7 +483,7 @@ function addrBtn() {
 												var layerCheck = 320;
 											}
 										
-											/* $(".addressBtn").fancybox({
+											$(".addressBtn").fancybox({
 												'autoDimensions'    : false,
 												'showCloseButton'	: false,
 												'width' : layerCheck,
@@ -690,7 +494,7 @@ function addrBtn() {
 													$('#fancybox-content').height($(this).contents().find('body').height());
 													});
 												}
-											}); */
+											});
 										
 										
 										});

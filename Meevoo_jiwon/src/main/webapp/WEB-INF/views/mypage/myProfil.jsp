@@ -17,7 +17,7 @@
 		<!-- 제이쿼리 최신 -->
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<style>
-			#all1{width:900px; border:1px solid black; margin:0 auto;}
+			#all1{width:900px; border:1px solid #f56a6a; margin:0 auto;}
 			.section1{color: black;}
 			.main1{width:200px; margin:0 auto;}
 			.main1 h2{margin: 0 0 35px 0; text-align: center; border-bottom: 1px solid lightgray; font-size: 40px;}
@@ -25,7 +25,7 @@
 			#preview{margin:0 0 20px;}
 			#info1_1, #info1_2, #info1_3, #info1_4, #info1_5, #info1_6, #info1_7, #info1_8
 				{width:700px; margin:20px 50px 10px 50px; font-size:15px; display: flex;}
-			.wrapper1{border-bottom:1px solid black; width:800px; height:590px; margin:0 auto;}
+			.wrapper1{border-bottom:1px dotted #f56a6a; width:800px; height:590px; margin:0 auto;}
 			.wrapper2{width:800px; height:400px; margin:10px auto;}
 			.info2 .info3{width:370px; margin:10px 50px 10px 50px; font-size:15px; display: inline-block; font-size:15px;
 			 line-height: 40px;}
