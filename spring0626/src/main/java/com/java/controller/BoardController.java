@@ -27,7 +27,7 @@ public class BoardController {
 	BoardService boardService;
 	
 	
-	@RequestMapping("/board/boardList")
+	@RequestMapping("/board/boardList") //게시글 전체 가져오기
 	public String boardList(@RequestParam(defaultValue = "1") int page, 
 			String category, String s_word, Model model) {
 		System.out.println("BoardController boardList category : "+category);

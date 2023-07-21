@@ -116,8 +116,8 @@
       	<c:if test="${num == page }">
 		      	<li class="num on"><div>${num }</div></li>
       	</c:if>
-      <!-- 다음페이지 이동 -->
       </c:forEach>
+      <!-- 다음페이지 이동 -->
       <c:if test="${page<maxPage }">
       	<a href="/board/boardList?page=${page+1 }&category=${category}&s_word=${s_word}"><li class="next"></li></a>
       </c:if>
