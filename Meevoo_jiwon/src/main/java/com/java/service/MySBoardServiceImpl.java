@@ -8,24 +8,26 @@ import org.springframework.stereotype.Service;
 
 import com.java.dto.CListCurrDto;
 import com.java.dto.CListJoinDto;
-import com.java.dto.CListPickDto;
 import com.java.dto.PageDto;
-import com.java.mapper.MyCBoardMapper;
+import com.java.dto.SListCurrDto;
+import com.java.dto.SListPickDto;
+import com.java.dto.SListReviewDto;
+import com.java.mapper.MySBoardMapper;
 
 @Service
-public class MyCBoardServiceImpl implements MyCBoardService {
+public class MySBoardServiceImpl implements MySBoardService {
 
-	@Autowired MyCBoardMapper myCBoardMapper;
+	@Autowired MySBoardMapper mySBoardMapper;
 	
-	@Override //운동모임 - 찜한 리스트 전체 가져오기
-	public HashMap<String, Object> selectClubPickAll(PageDto pageDto) {
+	@Override //체육시설 - 찜한 리스트 전체 가져오기
+	public HashMap<String, Object> selectSportPickAll(PageDto pageDto) {
 		HashMap<String, Object> map = new HashMap<>();
 		
 		//페이지정보 메소드호출
 		pageDto = pageMethod1(pageDto);
 		
 		//게시글 전체 가져오기
-		ArrayList<CListPickDto> list = myCBoardMapper.selectClubPickAll(pageDto);
+		ArrayList<SListPickDto> list = mySBoardMapper.selectSportPickAll(pageDto);
 		
 		map.put("list", list);
 		map.put("pageDto", pageDto);
@@ -33,11 +35,11 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		return map;
 	}
 	
-	//운동모임 - 찜한 리스트 페이지정보 메소드
+	//체육시설 - 찜한 리스트 페이지정보 메소드
 	public PageDto pageMethod1(PageDto pageDto) {
 		
 		//전체 게시글 수 저장
-		pageDto.setListCount(myCBoardMapper.selectListCPick());
+		pageDto.setListCount(mySBoardMapper.selectListSPick());
 		//최대 넘버링 페이지
 		pageDto.setMaxPage((int)Math.ceil((double)pageDto.getListCount()/10));
 		//시작 넘버링 페이지
@@ -52,14 +54,14 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		return pageDto;
 	}
 
-	@Override //운동모임 - 최근본 리스트 전체 가져오기
-	public HashMap<String, Object> selectClubCurrAll(PageDto pageDto) {
+	@Override //체육시설 - 최근본 리스트 전체 가져오기
+	public HashMap<String, Object> selectSportCurrAll(PageDto pageDto) {
 		HashMap<String, Object> map = new HashMap<>();
 		
 		//페이지 정보 메소드 호출
 		pageDto = pageMethod2(pageDto);
 		
-		ArrayList<CListCurrDto> list = myCBoardMapper.selectClubCurrAll(pageDto);
+		ArrayList<SListCurrDto> list = mySBoardMapper.selectSportCurrAll(pageDto);
 		
 		map.put("list", list);
 		map.put("pageDto", pageDto);
@@ -67,11 +69,11 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		return map;
 	}
 	
-	//운동모임 - 찜한 리스트 페이지정보 메소드
+	//체육시설 - 찜한 리스트 페이지정보 메소드
 	public PageDto pageMethod2(PageDto pageDto) {
 	
 		//전체 게시글 수 저장
-		pageDto.setListCount(myCBoardMapper.selectListCCurr());
+		pageDto.setListCount(mySBoardMapper.selectListSCurr());
 		//최대 넘버링 페이지
 		pageDto.setMaxPage((int)Math.ceil((double)pageDto.getListCount()/10));
 		//시작 넘버링 페이지
@@ -86,13 +88,13 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		return pageDto;
 	}
 
-	@Override //운동모임 - 참여한 리스트 전체 가져오기
-	public HashMap<String, Object> selectClubJoinAll(PageDto pageDto) {
-		HashMap<String, Object> map = new HashMap<>();
-		
+	@Override //체육시설 - 후기 작성한 리스트 전체 가져오기
+	public HashMap<String, Object> selectSportReviewAll(PageDto pageDto) {
+		HashMap<String, Object> map = new HashMap<>(); 
+				
 		pageDto = pageMethod3(pageDto);
 		
-		ArrayList<CListJoinDto> list = myCBoardMapper.selectClubJoinAll(pageDto);
+		ArrayList<SListReviewDto> list = mySBoardMapper.selectSportReviewAll(pageDto);
 		
 		map.put("list", list);
 		map.put("pageDto", pageDto);
@@ -100,15 +102,11 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		return map;
 	}
 
-	//운동모임 - 찜한 리스트 페이지정보 메소드
+	//체육시설 - 후기 작성한 리스트 페이지정보 메소드
 	public PageDto pageMethod3(PageDto pageDto) {
-		//System.out.println("MyCBoardServiceImpl count :"+pageDto.getListCount());
-		//System.out.println("MyCBoardServiceImpl count :"+pageDto.getMaxPage());
-		//System.out.println("MyCBoardServiceImpl count :"+pageDto.getStartPage());
-		//System.out.println("MyCBoardServiceImpl count :"+pageDto.getStartRow());
-		//System.out.println("MyCBoardServiceImpl getPage :"+pageDto.getPage());
+		
 		//전체 게시글 수 저장
-		pageDto.setListCount(myCBoardMapper.selectListCJoin());
+		pageDto.setListCount(mySBoardMapper.selectListSReview());
 		//최대 넘버링 페이지
 		pageDto.setMaxPage((int)Math.ceil((double)pageDto.getListCount()/10));
 		//시작 넘버링 페이지
@@ -122,5 +120,4 @@ public class MyCBoardServiceImpl implements MyCBoardService {
 		
 		return pageDto;
 	}
-
 }

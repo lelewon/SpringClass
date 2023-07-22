@@ -22,7 +22,7 @@ public class MyCBoardController {
 	
 	//운동모임 - 찜한 리스트 전체 가져오기
 	@RequestMapping("/mypage/myClubPick")
-	public String myClub(PageDto pageDto, Model model) {
+	public String myClubPick(PageDto pageDto, Model model) {
 
 		/* System.out.println("MyCBoardController page"+pageDto.getPage()); */
 		
@@ -36,7 +36,7 @@ public class MyCBoardController {
 		return "mypage/myClubPick";
 	}
 	
-	//운동모임 - 최근본 리스트 전체, 전체 리스트 개수 가져오기
+	//운동모임 - 최근본 리스트 전체 가져오기
 	@RequestMapping("/mypage/myClubCurr")
 	public String myClubCurr(PageDto pageDto, Model model) {
 		
@@ -51,11 +51,14 @@ public class MyCBoardController {
 	
 	//운동모임 - 참여한 리스트 전체 가져오기
 	@RequestMapping("/mypage/myClubJoin")
-	public String myClubJoin(Model model) {
+	public String myClubJoin(PageDto pageDto, Model model) {
 		
-		ArrayList<CListJoinDto> list = myCBoardService.selectClubJoinAll();
+		//System.out.println("MyCBoardController list : "+list.get(0).getid());
+		System.out.println("MyCBoardController page"+pageDto.getPage());
+		HashMap<String, Object> map = myCBoardService.selectClubJoinAll(pageDto);
 		
-		model.addAttribute("list", list);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pageDto", map.get("pageDto"));
 		
 		return "mypage/myClubJoin";
 	}
