@@ -110,6 +110,8 @@ public class BoardController {
 			File f = new File(uploadUrl+fileName);
 			file.transferTo(f); //파일저장
 			bdto.setBfile(fileName);
+		}else {
+			
 		}
 		boardService.updateOne(bdto);
 		s_word = URLEncoder.encode(s_word,"utf-8");

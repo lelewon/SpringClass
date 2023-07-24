@@ -66,18 +66,26 @@ public class MemberController {
 	public String join(Model model) {
 		//운동 종목 select에 데이터 가져오기
 		String[] scate = memberService.selectscateAll();
+		String[] dongcate = memberService.selectdongcateAll();
+		
 		
 		for(int i=0;i<scate.length;i++) { 
-			//System.out.println("scate : "+scate[i]);
+			System.out.println("scate : "+scate[i]);
+		} 
+
+		for(int i=0;i<dongcate.length;i++) { 
+			System.out.println("dongcate : "+dongcate[i]);
 		} 
 		
 		model.addAttribute("scate", scate);
+		model.addAttribute("dongcate", dongcate);
+		
 		return "member/join";
 	}
 	
 	//회원가입시 입력한 정보 저장
 	@PostMapping("/member/join")
-	public String join(MemberDto memberDto, MultipartFile file, Model model) {
+	public String join(MemberDto memberDto, MultipartFile file, Model model) throws Exception {
 		//System.out.println("MemberController usernm : "+memberDto.getUsernm());
 		//System.out.println("MemberController id : "+memberDto.getId());
 		//System.out.println("MemberController pw : "+memberDto.getPw());
@@ -86,6 +94,7 @@ public class MemberController {
 		//System.out.println("MemberController addr : "+memberDto.getAddr());
 		//System.out.println("MemberController birth : "+memberDto.getBirth());
 		//System.out.println("MemberController scate : "+memberDto.getScate());
+		//System.out.println("MemberController dongcate : "+memberDto.getDongcate());
 		
 		 
 		 //회원가입시 입력한 정보 저장
@@ -113,6 +122,7 @@ public class MemberController {
 		return result;
 	}
 
+	//가입약관 동의하기
 	@RequestMapping("/member/agree")
 	public String agree() {
 		return "member/agree";
