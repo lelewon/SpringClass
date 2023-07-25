@@ -72,8 +72,8 @@ public class MyCBoardController {
 		
 		ArrayList<ClubDto> list = myCBoardService.selectCPickTop4();
 		
-		System.out.println("MyCBoardController cnm : "+list.get(0).getCnm());
-		System.out.println("MyCBoardController cnm : "+list.get(0).getDongcate());
+		//System.out.println("MyCBoardController cnm : "+list.get(0).getCnm());
+		//System.out.println("MyCBoardController cnm : "+list.get(0).getDongcate());
 		
 		
 		model.addAttribute("list", list);

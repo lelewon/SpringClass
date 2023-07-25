@@ -19,6 +19,7 @@ public class PageDto {
 	private int rowPerPage=10;			// 페이지 당 게시글 갯수, default 10개
 	private int numberringPerPage=10;	// 페이지 갯수
 	
+	private String id;
 	
 
 }
