@@ -108,4 +108,18 @@
 		#{srerepcontent},#{srerepinput},#{srerepimg})
 	</insert>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 최근본 게시물 데이터 기록 -->
+	<insert id="insertSCurr">
+		insert into sportcurr (scurrno, id, sfno, scurrdate)
+		values (#{scurrno}, #{id}, #{sfno}, sysdate)
+	</insert>
 </mapper>

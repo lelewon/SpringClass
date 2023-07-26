@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import java.util.HashMap;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReviewDto;
@@ -42,6 +43,7 @@ public interface SportService {
 	SportPickDto sportPickCancel(SportPickDto spickDto);
 	// 3. 시설물 다시 찜하기(업뎃)
 	SportPickDto sportPickUpdate(SportPickDto spickDto);
+	
 
 	
 	
@@ -51,4 +53,13 @@ public interface SportService {
 //	// 게시글 1개 가져오기
 //	SportDto selectOne(int fcltyno);
 
+	
+	
+	
+	
+	
+	
+	
+	//최근본 게시물 데이터 기록
+	SListCurrDto insertSCurr(SListCurrDto scurrdto, String id);
 }

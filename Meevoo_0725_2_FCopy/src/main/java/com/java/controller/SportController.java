@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReportDto;
@@ -30,6 +33,8 @@ public class SportController {
 
 	@Autowired
 	SportService sportService;
+	
+	@Autowired HttpSession session;
 	
 	@RequestMapping("/sport/sportList")
 	public String sportList(@RequestParam(defaultValue ="1")int page,
@@ -51,7 +56,7 @@ public class SportController {
 	
 	@RequestMapping("/sport/sportListView")
 	public String sportListView(@RequestParam(defaultValue = "1") int sfno,
-			@RequestParam(defaultValue = "1")int page, Model model) {
+			@RequestParam(defaultValue = "1")int page, SListCurrDto scurrdto, Model model) {
 
 		// 게시글 1개 가져오기
 		HashMap<String, Object> map = sportService.selectOne(sfno);
@@ -66,6 +71,23 @@ public class SportController {
 		model.addAttribute("spickList", spickList);
 		
 		model.addAttribute("page", page);
+
+		
+		
+		//최근본 게시물 데이터 기록
+		String id = (String)session.getAttribute("sessionId");
+		if(id!=null) {
+			session.setAttribute("ssessionId", id);
+		}
+		scurrdto = sportService.insertSCurr(scurrdto, id);
+		System.out.println("SportController id :"+id);
+		System.out.println("SportController getId :"+scurrdto.getId());
+		System.out.println("SportController getScurrno :"+scurrdto.getScurrno());
+		System.out.println("SportController getSfno :"+scurrdto.getSfno());
+		System.out.println("SportController getScurrdate :"+scurrdto.getScurrdate());
+		
+		
+		
 		return "/sport/sportListView";
 	} // sportListView
 	

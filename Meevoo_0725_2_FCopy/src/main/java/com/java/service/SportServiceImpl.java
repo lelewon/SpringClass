@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReviewDto;
@@ -163,6 +164,21 @@ public class SportServiceImpl implements SportService {
 		// 찜하기 전체 가져오기
 		ArrayList<SportPickDto> spickList = sportMapper.selectSpAll(sfno);
 		return spickList;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override //최근본 게시물 데이터 기록
+	public SListCurrDto insertSCurr(SListCurrDto scurrdto, String id) {
+		scurrdto = SportMapper.insertSCurr(scurrdto, id);
+		
+		return scurrdto;
 	}
 
 

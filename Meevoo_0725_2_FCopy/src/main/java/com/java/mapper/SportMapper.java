@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReviewDto;
@@ -57,6 +58,9 @@ public interface SportMapper {
 	void sportPickCancel(SportPickDto spickDto);
 	// 3. 시설물 다시 찜하기(업뎃)
 	void sportPickUpdate(SportPickDto spickDto);
+
+
+	
 	
 
 
@@ -69,5 +73,18 @@ public interface SportMapper {
 //	//게시글 1개 가져오기
 //	SportDto selectOne(int fcltyno);
 
+	
+	
+	
+	
+	
+	
+	
+	
+	//최근본 게시물 데이터 기록
+	static SListCurrDto insertSCurr(SListCurrDto scurrdto, String id) {
+		
+		return scurrdto;
+	}
 	
 }
