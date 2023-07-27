@@ -55,11 +55,6 @@ public interface SportService {
 
 	
 	
-	
-	
-	
-	
-	
-	//최근본 게시물 데이터 기록
-	SListCurrDto insertSCurr(SListCurrDto scurrdto, String id);
+	//최근본 시설 게시물 데이터 기록하기
+	void insertSCurr(SListCurrDto scurrdto);
 }

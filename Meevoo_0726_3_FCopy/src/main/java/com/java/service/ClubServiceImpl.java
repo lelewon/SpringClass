@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
 import com.java.dto.PageDto;
 import com.java.mapper.ClubMapper;
@@ -138,7 +139,11 @@ public class ClubServiceImpl implements ClubService {
 	}//모임목록 글 1개 저장
 
 
-
+	@Override //최근본 모임 게시물 데이터 기록하기
+	public void insertCCurr(CListCurrDto ccurrdto) {
+		clubMapper.insertCCurr(ccurrdto);
+		
+	}
 
 	
 

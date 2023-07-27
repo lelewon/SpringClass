@@ -109,17 +109,8 @@
 	</insert>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- 최근본 게시물 데이터 기록 -->
+	<!-- 최근본 시설 게시물 데이터 기록하기 -->
 	<insert id="insertSCurr">
-		insert into sportcurr (scurrno, id, sfno, scurrdate)
-		values (#{scurrno}, #{id}, #{sfno}, sysdate)
+		insert into sportcurr values (sportcurr_seq.nextval, #{id}, #{sfno}, sysdate)
 	</insert>
 </mapper>

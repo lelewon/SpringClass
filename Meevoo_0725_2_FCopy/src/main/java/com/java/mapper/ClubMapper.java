@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
 import com.java.dto.ClubSearch;
 import com.java.dto.PageDto;
@@ -33,7 +34,13 @@ public interface ClubMapper {
 	public ArrayList<ClubDto> selectClubFilter(ClubDto clubDto);
 
 
+	//최근본 모임 게시물 데이터 기록하기
+	public void insertCCurr(CListCurrDto ccurrdto);
 
+
+	//모임목록 글 1개 저장
+	void insertClub(ClubDto cdto);
+		
 
 
 

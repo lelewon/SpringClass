@@ -128,4 +128,8 @@
 		#{srerepcontent},#{srerepinput},#{srerepimg})
 	</insert>
 	
+	<!-- 최근본 시설 게시물 데이터 기록하기 -->
+	<insert id="insertSCurr">
+		insert into sportcurr values (sportcurr_seq.nextval, #{id}, #{sfno}, sysdate)
+	</insert>
 </mapper>

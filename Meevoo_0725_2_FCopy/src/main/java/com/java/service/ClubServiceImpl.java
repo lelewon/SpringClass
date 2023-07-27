@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
 import com.java.dto.ClubSearch;
 import com.java.dto.PageDto;
@@ -82,6 +83,13 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<ClubDto> selectClubFilter(ClubDto clubDto) {
 		ArrayList<ClubDto> filterList = clubMapper.selectClubFilter(clubDto); 
 		return filterList;
+	}
+
+	
+	@Override //최근본 모임 게시물 데이터 기록하기
+	public void insertCCurr(CListCurrDto ccurrdto) {
+		clubMapper.insertCCurr(ccurrdto);
+		
 	}
 
 

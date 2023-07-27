@@ -74,17 +74,27 @@ public class SportController {
 
 		
 		
-		//최근본 게시물 데이터 기록
+		//최근본 시설 게시물 데이터 기록하기
+		//세션 아이디 저장
 		String id = (String)session.getAttribute("sessionId");
+		//System.out.println("SportController id :"+id);
+		
+		//아이디 있을때 Dto에 저장
 		if(id!=null) {
 			session.setAttribute("ssessionId", id);
+			scurrdto.setId(id);
+		}else {
+			return "/sport/sportListView";
 		}
-		scurrdto = sportService.insertSCurr(scurrdto, id);
-		System.out.println("SportController id :"+id);
-		System.out.println("SportController getId :"+scurrdto.getId());
-		System.out.println("SportController getScurrno :"+scurrdto.getScurrno());
-		System.out.println("SportController getSfno :"+scurrdto.getSfno());
-		System.out.println("SportController getScurrdate :"+scurrdto.getScurrdate());
+		//System.out.println("SportController getId :"+scurrdto.getId());
+		//System.out.println("SportController getScurrno :"+scurrdto.getScurrno());
+		//System.out.println("SportController getSfno :"+scurrdto.getSfno());
+		//System.out.println("SportController getScurrdate :"+scurrdto.getScurrdate());
+		
+		sportService.insertSCurr(scurrdto);
+		
+		//System.out.println("scurrdto 완료");
+		
 		
 		
 		

@@ -60,11 +60,6 @@ public interface SportMapper {
 	void sportPickUpdate(SportPickDto spickDto);
 
 
-	
-	
-
-
-
 
 	
 //	//게시글 전체 가져오기
@@ -74,17 +69,7 @@ public interface SportMapper {
 //	SportDto selectOne(int fcltyno);
 
 	
-	
-	
-	
-	
-	
-	
-	
-	//최근본 게시물 데이터 기록
-	static SListCurrDto insertSCurr(SListCurrDto scurrdto, String id) {
-		
-		return scurrdto;
-	}
+	//최근본 시설 게시물 데이터 기록하기
+	void insertSCurr(SListCurrDto scurrdto) ;
 	
 }

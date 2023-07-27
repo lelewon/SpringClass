@@ -168,17 +168,10 @@ public class SportServiceImpl implements SportService {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	@Override //최근본 게시물 데이터 기록
-	public SListCurrDto insertSCurr(SListCurrDto scurrdto, String id) {
-		scurrdto = SportMapper.insertSCurr(scurrdto, id);
+	@Override //최근본 시설 게시물 데이터 기록하기
+	public void insertSCurr(SListCurrDto scurrdto) {
+		sportMapper.insertSCurr(scurrdto);
 		
-		return scurrdto;
 	}
 
 

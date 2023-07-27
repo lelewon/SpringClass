@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
 import com.java.dto.PageDto;
 import com.java.service.ClubService;
@@ -65,11 +66,32 @@ public class ClubController {
 	
 
 	@RequestMapping("/club/cView")
-	public String cView(int cno, Model model) {
+	public String cView(int cno, CListCurrDto ccurrdto, Model model) {
 		
 		// 모임목록 1개 가져오기
 		ClubDto cdto = clubService.selectClubOne(cno);
 		model.addAttribute("cdto", cdto);
+		
+		
+		//최근본 모임 게시물 데이터 기록하기
+		//세션 아이디 저장
+		String id = (String)session.getAttribute("sessionId");
+		System.out.println("ClubController id : "+id);
+		
+		//아이디 있을때 Dto에 저장
+		if(id!=null) {
+			session.setAttribute("sessionId", id);
+			ccurrdto.setId(id);
+		}else {
+			return "club/cView";
+		}
+		System.out.println("SportController getId :"+ccurrdto.getId());
+		System.out.println("SportController getScurrno :"+ccurrdto.getCcurrno());
+		System.out.println("SportController getSfno :"+ccurrdto.getCno());
+		System.out.println("SportController getScurrdate :"+ccurrdto.getCcurrdate());
+		
+		clubService.insertCCurr(ccurrdto);
+		
 		
 		return "club/cView";
 	}

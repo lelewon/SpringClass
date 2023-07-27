@@ -3,6 +3,7 @@ package com.java.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
 import com.java.dto.ClubSearch;
 import com.java.dto.PageDto;
@@ -23,6 +24,10 @@ public interface ClubService {
 	
 	// 필터 input 반영해서 모임목록 가져오기 (필터검색)
 	ArrayList<ClubDto> selectClubFilter(ClubDto clubDto);
+
+	
+	//최근본 모임 게시물 데이터 기록하기
+	void insertCCurr(CListCurrDto ccurrdto);
 
 
 	

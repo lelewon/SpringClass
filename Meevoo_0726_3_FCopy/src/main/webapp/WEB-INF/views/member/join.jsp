@@ -155,9 +155,9 @@ function idcheckBtn(){ //ajax은 페이지가 아닌 값으로 넘겨준다.
 			console.log("checkedId : "+result);
 			if($("#id").val()!=""){
 				if(result=="success"){
-					$("#idCheckText").html("<span class='mvalign orange'>* 사용가능한 아이디입니다.</span>")
+					$("#idCheckText").html("<span class='mvalign blue'>* 사용가능한 아이디입니다.</span>")
 				}else{
-					$("#idCheckText").html("<span class='mvalign black'>* 아이디를 사용할 수 없습니다.</span>")
+					$("#idCheckText").html("<span class='mvalign red'>* 아이디를 사용할 수 없습니다.</span>")
 					$("#id").val("");
 				}
 			}else{
@@ -464,7 +464,7 @@ function addrBtn() {
 														<th scope="row"><span>비밀번호 *</span></th>
 														<td>
 															<ul class="pta">
-																<li class="r10"><input type="text" name="pw" id="pw" class="w134" /></li>
+																<li class="r10"><input type="password" name="pw" id="pw" class="w134" /></li>
 																<li style="padding:10px 0 0 0;"><span class="mvalign">※ 숫자로 5자만 가능</span></li>
 															</ul>
 														</td>
@@ -487,7 +487,7 @@ function addrBtn() {
 														<th scope="row"><span>비밀번호 확인 *</span></th>
 														<td>
 															<ul class="pta">
-																<li class="r10"><input type="text" onkeyup="pwKey()" id="pw2" class="w134" /></li>
+																<li class="r10"><input type="password" onkeyup="pwKey()" id="pw2" class="w134" /></li>
 																<li id="pwKeyText">
 																</li>
 															</ul>
