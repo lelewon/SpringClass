@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
+import com.java.dto.ClubPickDto;
 import com.java.dto.PageDto;
 import com.java.mapper.ClubMapper;
 
@@ -140,6 +142,33 @@ public class ClubServiceImpl implements ClubService {
 
 
 
+	@Override //최근본 모임 게시물 데이터 기록하기
+	public void insertCCurr(CListCurrDto ccurrdto) {
+		clubMapper.insertCCurr(ccurrdto);
+		
+	}
+
+	@Override //운동모임 찜하기
+	public int clubPick(ClubPickDto cpickdto) {
+		clubMapper.clubPick(cpickdto);
+		System.out.println("ClubServiceImpl cpickdto.getCpickno() : "+cpickdto.getCpickno());
+		
+		return cpickdto.getCpickno();
+	}
+
+	@Override //운동모임 찜하기 취소(삭제)하기
+	public void clubPickCancel(int cpickno, String id) {
+		clubMapper.clubPickCancel(cpickno, id);
+		
+	}
+
+	@Override //data_value 변수 값 가져오기 0:찜을 하지 않은 경우, 1:찜을 한경우
+	public int countCPick(int cno, String id) {
+		int data_value = clubMapper.countCPick(cno, id);
+		
+		return data_value;
+	}
+	
 	
 
 	

@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReviewDto;
@@ -154,6 +155,13 @@ public class SportServiceImpl implements SportService {
 		int spickcount = sportMapper.selectSpCount(sfno,id);
 		System.out.println(spickcount);
 		return spickcount;
+	}
+
+	
+	@Override //최근본 시설 게시물 데이터 기록하기
+	public void insertSCurr(SListCurrDto scurrdto) {
+		sportMapper.insertSCurr(scurrdto);
+		
 	}
 
 

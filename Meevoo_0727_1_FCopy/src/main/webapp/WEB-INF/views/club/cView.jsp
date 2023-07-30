@@ -57,7 +57,7 @@
 										  <!-- 우상단 세부메뉴 점세개 끝-->
 										  <h1>${cdto.cnm}</h1>
 										    <div style="width:70%; margin: 0 0 2em 0; padding: 1em 0 0 0;">
-	  									       <span style="display inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: rgba(244, 244, 244, 0.5); ">
+	  									       <span style="display:inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: rgba(244, 244, 244, 0.5); ">
 											      <c:if test="${cdto.scate eq '스케이트'}">
 												    <img src="../images/sports/iceSkateIcon.png" style="width: 30px; vertical-align: middle;" />
 												  </c:if>
@@ -89,14 +89,81 @@
 											      <span style="font-size:1em; font-weight: bold; text-align: center;">${cdto.scate}</span>
 										       </span>
 										       &nbsp;&nbsp;&nbsp;
-	 										   <span style="display inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: rgba(244, 244, 244, 0.5); ">
+										       <!-- @@@@찜하기 버튼-지원@@@@ -->
+										       <script>
+										          var cpickNum="";
+										          function pickBtn(){
+										        	  
+										        	  const cpick_tag = document.querySelector('#cpick');
+										        	  const cpick = cpick_tag.dataset.value; //0,1
+										        	  alert("data-value : "+ cpick); //0:찜을 하지 않은 경우, 1:찜을 한경우
+										        	  
+										        	  
+										        	  alert("찜개수 : "+ $("#pickNum").text());
+										        	  if("${sessionId}"=="" || "${sessionId}"==null){
+								    						alert("로그인을 하셔야 찜하기가 가능합니다.");
+								    						location.href="/member/login";
+								    						return false;
+								    					}
+										        	  
+										        	  if(cpick==0){
+												        	  if(confirm("찜하기를 하시겠습니까?")){
+												        		  $.ajax({
+												        			 url:"/club/clubPick",
+												        			 type:"post",
+												        			 data:{	"id":"${sessionId}",
+												        				 	"cno":"${cdto.cno}"},
+												        			 success:function(data){
+												        				 cpickNum = data;	 //등록된 cpickno를 저장 
+												        				 alert("cpickNum1 : "+ cpickNum);
+												        				 alert("찜하기가 등록되었습니다.");
+												        				 alert("찜개수 : "+( Number($("#pickNum").text() )+1 ) );
+												        				 $("#pickNum").text(Number($("#pickNum").text())+1);
+												        				 $("#cpick").attr("style","background-color:#f56a6a; color:#fff; display:inline-block; padding: 10px; cursor:pointer; border: 1px; border-radius: 10%; ");
+												        			 },
+												        			 error:function(){
+												        				 alert("실패");
+												        			 }
+												        			});//ajax
+												        	  	}
+										        	 	 }else{
+										        		   
+											        		  if(confirm("찜하기를 취소하시겠습니까?")){
+												        		  $.ajax({
+												        			 url:"/club/clubPickCancel",
+												        			 type:"post",
+												        			 data:{	"id":"${sessionId}",
+												        				 	"cno":"${cdto.cno}",
+												        				 	"cpickno": cpickNum},
+												        			dataType: "json",									        				 	
+												        			 success:function(data){
+												        				 cpickNum = data;
+												        				 console.log("cpickNum의 값:", cpickNum);
+														        	     alert("cpickNum2 : "+ cpickNum);
+												        				 alert("찜하기가 취소되었습니다.");
+												        				 alert("찜개수 : "+( Number($("#pickNum").text() )-1 )   );
+												        				 $("#pickNum").text(Number($("#pickNum").text())-1);
+												        				 $("#cpick").attr("style","background-color: rgba(244, 244, 244, 0.5); color:#000; display:inline-block; padding: 10px; cursor:pointer; border: 1px; border-radius: 10%; ");
+												        			 },
+												        			 error:function(){
+												        				 alert("실패");
+												        			 }
+												        		});//ajax
+											        	 	  }//if
+										        	 	 	}//else
+										          }//pickBtn()
+										       </script>
+										       
+	 										   <span id="cpick" onclick="pickBtn()" data-value="${data_value}" style="display:inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: rgba(244, 244, 244, 0.5); cursor:pointer;  ">
 												  <img src="../images/general/index.png" style="width:30px; vertical-align: middle;" />
 											      &nbsp;
-											      <span style="font-size:1em; font-weight: bold; text-align: center;">저장&nbsp;&nbsp;${cdto.ctotalpick}</span>
+											      <span style="font-size:1em; font-weight: bold; text-align: center;">저장&nbsp;&nbsp;</span><span id="pickNum">${cdto.ctotalpick}</span>
 										       </span>
+										       <!-- @@@@찜하기 버튼-지원@@@@ -->
+										       
 										       &nbsp;&nbsp;&nbsp;
 											      <c:if test="${cdto.cnowstatus eq '모집중'}">
-											        <span style="display inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: #f56a6a; color: #ffffff; font-size:1em; font-weight: bold; text-align: center; ">
+											        <span style="display:inline-block; padding: 10px; border: 1px; border-radius: 10%; background-color: #f56a6a; color: #ffffff; font-size:1em; font-weight: bold; text-align: center; ">
 												      <img src="../images/general/memberAdd.png" style="width:30px; vertical-align: middle;" />
 												      <span>${cdto.cnowstatus}</span>
 										            </span>

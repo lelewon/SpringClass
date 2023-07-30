@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReviewDto;
@@ -54,5 +55,9 @@ public interface SportMapper {
 	// 찜 Count(sfno,sessionId)
 	int selectSpCount(int sfno, String id);
 
+	
+	
+	//최근본 시설 게시물 데이터 기록하기
+	void insertSCurr(SListCurrDto scurrdto) ;
 	
 }

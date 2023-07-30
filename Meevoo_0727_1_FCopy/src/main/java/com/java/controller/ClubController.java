@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
+import com.java.dto.ClubPickDto;
 import com.java.dto.PageDto;
 import com.java.service.ClubService;
 import com.java.service.ClubWriteSearchSFService;
@@ -65,15 +67,70 @@ public class ClubController {
 	
 
 	@RequestMapping("/club/cView")
-	public String cView(int cno, Model model) {
+	public String cView(int cno, CListCurrDto ccurrdto, Model model) {
 		
 		// 모임목록 1개 가져오기
 		ClubDto cdto = clubService.selectClubOne(cno);
 		model.addAttribute("cdto", cdto);
 		
+		//지원----------------------------------
+		//최근본 모임 게시물 데이터 기록하기
+		//세션 아이디 저장
+		String id = (String)session.getAttribute("sessionId");
+		//System.out.println("ClubController id : "+id);
+		
+		//data_value 변수 값 가져오기 0:찜을 하지 않은 경우, 1:찜을 한경우
+		// 찜 변수 select count(*) as data_value from clubpick where id='born' and cno=500
+		if(id!=null) {
+			int data_value = clubService.countCPick(cno, id);
+			model.addAttribute("data_value", data_value);
+		}
+		
+		//아이디 있을때 Dto에 저장
+		if(id!=null) {
+			session.setAttribute("sessionId", id);
+			ccurrdto.setId(id);
+		}else {
+			return "club/cView";
+		}
+		
+		clubService.insertCCurr(ccurrdto);
+		//----------------------------------지원
+		
 		return "club/cView";
 	}
 
+
+	//지원--------------------------------------------------
+	//운동모임 찜하기
+	@RequestMapping("/club/clubPick")
+	@ResponseBody
+	public int clubPick(ClubPickDto cpickdto, Model model) {
+		
+		clubService.clubPick(cpickdto);
+		
+		System.out.println("등록 ajax에서 넘어온 cpickno : "+cpickdto.getCpickno());
+		System.out.println("등록 ajax에서 넘어온 아이디 : "+cpickdto.getId());
+		System.out.println("등록 ajax에서 넘어온 모임번호 : "+cpickdto.getCno());
+		System.out.println("등록 ajax에서 넘어온 cpickyn : "+cpickdto.getCpickyn());
+		System.out.println("등록 ajax에서 넘어온 cpickdate : "+cpickdto.getCpickdate());
+		
+		return cpickdto.getCpickno();
+	}
+	
+	//운동모임 찜하기 취소(삭제)하기
+	@RequestMapping("/club/clubPickCancel")
+	@ResponseBody
+	public ClubPickDto clubPickCancel(int cpickno,String id) {
+		clubService.clubPickCancel(cpickno,id);
+		
+		System.out.println("등록 ajax에서 넘어온 cpickno : "+cpickno);
+		
+		return null;
+	}
+	
+	//--------------------------------------------------지원
+	
 	
 	@GetMapping("/club/cWrite")
 	public String cWrite() {

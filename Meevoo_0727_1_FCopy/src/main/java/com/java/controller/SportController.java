@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.java.dto.SListCurrDto;
 import com.java.dto.SportDto;
 import com.java.dto.SportPickDto;
 import com.java.dto.SportReportDto;
@@ -60,7 +61,7 @@ public class SportController {
 	@RequestMapping("/sport/sportListView")
 	public String sportListView(@RequestParam(defaultValue = "1") int sfno,
 			@RequestParam(defaultValue = "1")int page,
-			String slist_word,Model model) {
+			String slist_word, SListCurrDto scurrdto, Model model) {
 
 		// 게시글 1개 가져오기
 		HashMap<String, Object> map = sportService.selectOne(sfno);
@@ -87,6 +88,33 @@ public class SportController {
 		
 		//검색 필터
 		model.addAttribute("slist_word", slist_word);
+		
+		
+		
+		
+		//최근본 시설 게시물 데이터 기록하기
+		//세션 아이디 저장
+		
+		//System.out.println("SportController id :"+id);
+		
+		//아이디 있을때 Dto에 저장
+		if(id!=null) {
+			session.setAttribute("ssessionId", id);
+			scurrdto.setId(id);
+		}else {
+			return "/sport/sportListView";
+		}
+		//System.out.println("SportController getId :"+scurrdto.getId());
+		//System.out.println("SportController getScurrno :"+scurrdto.getScurrno());
+		//System.out.println("SportController getSfno :"+scurrdto.getSfno());
+		//System.out.println("SportController getScurrdate :"+scurrdto.getScurrdate());
+		
+		sportService.insertSCurr(scurrdto);
+		
+		//System.out.println("scurrdto 완료");
+		
+		
+		
 		
 		return "/sport/sportListView";
 	} // sportListView

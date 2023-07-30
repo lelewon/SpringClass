@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.java.dto.CListCurrDto;
 import com.java.dto.ClubDto;
+import com.java.dto.ClubPickDto;
 import com.java.dto.ClubSearch;
 import com.java.dto.PageDto;
 
@@ -37,9 +39,19 @@ public interface ClubMapper {
 	
 	
 
+	//최근본 모임 게시물 데이터 기록하기
+	public void insertCCurr(CListCurrDto ccurrdto);
 
+	//운동모임 찜하기
+	public void clubPick(ClubPickDto cpickdto);
 
+	//운동모임 찜하기 취소(삭제)하기
+	void clubPickCancel(int cpickno, String id);
 
+	//data_value 변수 값 가져오기 0:찜을 하지 않은 경우, 1:찜을 한경우
+	public int countCPick(int cno, String id);
+	
+	
 
 
 }
